@@ -3,7 +3,7 @@
 const fs = require('fs').promises;
 
 async function init() {
-    const octosFile = await fs.readFile('./assets/day11-input', 'utf8');
+    const octosFile = await fs.readFile('./assets/day11-sample', 'utf8');
     const octos = octosFile.split('\n').filter(Boolean).map((row) => row.split('').map(Number));
 
     let totalFlashes = 0;
@@ -11,7 +11,7 @@ async function init() {
     const progress = octos.slice();
 
     function render() {
-	console.log(progress.map((row) => row.map((octo) => String(octo).padEnd(3, '_')).join('')).join('\n'), '\n');
+	console.log(progress.map((row) => row.map((octo) => String(octo === 0 ? `\x1b[31m${octo}\x1b[0m` : octo).padEnd(octo === 0 ? 12 : 3, ' ')).join('')).join('\n'), '\n');
     }
 
     function run(maxSteps, untilSync) {
