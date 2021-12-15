@@ -18,14 +18,11 @@ async function init() {
 		pairs[pair] -= count;
 	    }
 
-	    const pairLeft = pair.length > 1 && `${pair.charAt(0)}${rules[pair]}`;
-	    const pairRight = pair.length > 1 && `${rules[pair]}${pair.charAt(1)}`;
+	    if (pair.length > 1) {
+		const pairLeft = `${pair.charAt(0)}${rules[pair]}`;
+		const pairRight = `${rules[pair]}${pair.charAt(1)}`;
 
-	    if (pairLeft) {
 		pairs[pairLeft] = (pairs[pairLeft] || 0) + count;
-	    }
-
-	    if (pairRight) {
 		pairs[pairRight] = (pairs[pairRight] || 0) + count;
 	    }
 	})
