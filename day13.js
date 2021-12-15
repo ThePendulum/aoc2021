@@ -36,7 +36,7 @@ async function init() {
 	return paper.map((row) => row.slice(0, fold).map((dot, dotIndex) => dot || row[row.length - dotIndex - 1]));
     }
 
-    function foldPaper(paperFolds) {
+    function foldPaper(paperFolds, showRender) {
 	const foldedPaper = paperFolds.reduce((acc, fold) => {
 	    if (fold.y) {
 		return foldY(acc, fold.y);
@@ -49,11 +49,15 @@ async function init() {
 	    return acc;
 	}, paper);
 
-	render(foldedPaper);
+	if (showRender) {
+	    render(foldedPaper);
+	}
+
 	console.log(foldedPaper.flat().filter(Boolean).length);
     }
 
-    foldPaper(folds);
+    foldPaper(folds.slice(0, 1)); // part 1
+    foldPaper(folds, true); // part 2
 }
 
 init();
